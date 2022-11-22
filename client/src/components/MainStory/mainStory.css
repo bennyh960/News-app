@@ -1,0 +1,25 @@
+.main-story-container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  max-height: 50vh;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.main-story-container div {
+  flex: 1;
+}
+
+.main_story_image img {
+  height: 100%;
+  /* border: 1px solid black; */
+}
+
+.main_story_short {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  line-height: 2rem;
+}

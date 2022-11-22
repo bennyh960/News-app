@@ -1,0 +1,77 @@
+#account {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80vh;
+  gap: 3rem;
+  /* background-color: aliceblue; */
+}
+
+.account-left,
+.account-right,
+.form,
+.login,
+.signin,
+.reset-password .messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.messages {
+  height: 10%;
+  /* border: 1px solid black; */
+  flex: 0.2;
+  overflow: hidden;
+}
+
+.account-right {
+  width: 100%;
+  justify-content: space-around;
+}
+.login,
+.signin,
+.reset-password {
+  width: 100%;
+  justify-content: space-around;
+  animation: pops 0.5s ease-in;
+}
+
+.account-left {
+  /* border: 0.2px solid #918f8f; */
+  align-items: center;
+}
+
+.form {
+  flex: none;
+  width: 60%;
+  margin: 0 auto;
+  gap: 2rem;
+  height: 100%;
+}
+
+.form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.form div input,
+.form button {
+  padding: 5px;
+}
+
+.messages {
+  min-height: 2rem;
+  width: 100%;
+}
+
+.account-right {
+  max-width: 50%;
+}
+
+@media screen and (max-width: 650px) {
+  .account-right {
+    display: none;
+  }
+}

@@ -1,0 +1,46 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+  /* border: 1px solid black; */
+  /* height: 100vh; */
+}
+
+@media screen and (max-width: 650px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@keyframes pops {
+  from {
+    transform: translateY(-100%);
+    z-index: -10;
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+.loader1 {
+  animation: loader1 infinite 2s ease-in;
+}
+
+.blocker {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 150%;
+  max-width: 148.5vw;
+  background-color: rgba(180, 177, 177, 0.288);
+}
+
+@keyframes loader1 {
+  from {
+    transform: scale(0.5, 1);
+    /* transform: rotate(0deg); */
+  }
+  to {
+    transform: scale(1, 0.5);
+    /* transform: rotate(360deg); */
+  }
+}
