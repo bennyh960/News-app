@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import UseGetHook from "../../hooks/useAuth";
+import logoSmall from "../../assets/images/news-logo.jpg";
+
 import "./nav.css";
+import Select from "./Select";
 const Nav: React.FC<any> = ({ setIsUser, isUser, setCategory }) => {
   const [userName, setUserName] = useState("");
   const [token, setToken] = useState("");
+  const [active, setActive] = useState("general");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +32,7 @@ const Nav: React.FC<any> = ({ setIsUser, isUser, setCategory }) => {
   const handleCategoryClicked = (e: any) => {
     console.log(e.target.id);
     setCategory(() => e.target.id);
+    setActive(() => e.target.id);
   };
 
   return (
@@ -35,12 +40,17 @@ const Nav: React.FC<any> = ({ setIsUser, isUser, setCategory }) => {
       <nav>
         <div id="nav-primary">
           <div className="nav-logo-user-container">
-            <span>logo</span>
+            <span className="logo-small btn">
+              <NavLink to="/">
+                <img src={logoSmall} alt="small-logo" />
+              </NavLink>
+            </span>
             <span style={{ color: "yellow" }}>Welcome {isUser ? userName : "Guest"}</span>
           </div>
 
           <div id="search-navbar">
-            <input type="text" placeholder="Search..." />
+            {/* <input type="text" placeholder="Search..." /> */}
+            <Select />
           </div>
           <ul>
             <li>
@@ -71,25 +81,33 @@ const Nav: React.FC<any> = ({ setIsUser, isUser, setCategory }) => {
       </nav>
       <div id="nav-secondary">
         <ul>
-          <li className="btn" onClick={handleCategoryClicked} id="general">
+          <li className={`btn ${active === "general" ? "active" : ""}`} onClick={handleCategoryClicked} id="general">
             General
           </li>
-          <li className="btn" onClick={handleCategoryClicked} id="business">
+          <li className={`btn ${active === "business" ? "active" : ""}`} onClick={handleCategoryClicked} id="business">
             Business
           </li>
-          <li className="btn" onClick={handleCategoryClicked} id="entertainment">
+          <li
+            className={`btn ${active === "entertainment" ? "active" : ""}`}
+            onClick={handleCategoryClicked}
+            id="entertainment"
+          >
             Entertainment
           </li>
-          <li className="btn" onClick={handleCategoryClicked} id="health">
+          <li className={`btn ${active === "health" ? "active" : ""}`} onClick={handleCategoryClicked} id="health">
             Health
           </li>
-          <li className="btn" onClick={handleCategoryClicked} id="science">
+          <li className={`btn ${active === "science" ? "active" : ""}`} onClick={handleCategoryClicked} id="science">
             Science
           </li>
-          <li className="btn" onClick={handleCategoryClicked} id="sports">
+          <li className={`btn ${active === "sports" ? "active" : ""}`} onClick={handleCategoryClicked} id="sports">
             Sports
           </li>
-          <li className="btn" onClick={handleCategoryClicked} id="technology">
+          <li
+            className={`btn ${active === "technology" ? "active" : ""}`}
+            onClick={handleCategoryClicked}
+            id="technology"
+          >
             Technology
           </li>
         </ul>

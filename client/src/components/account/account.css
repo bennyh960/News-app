@@ -70,6 +70,10 @@
   max-width: 50%;
 }
 
+.account-right img {
+  border-radius: 50%;
+}
+
 @media screen and (max-width: 650px) {
   .account-right {
     display: none;

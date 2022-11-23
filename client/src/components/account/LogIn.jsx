@@ -1,5 +1,3 @@
-import React from "react";
-
 const LogIn = ({ handleChange, email, password, handleSubmit, handleSigninLogin }) => {
   return (
     <div className="login">
@@ -14,11 +12,11 @@ const LogIn = ({ handleChange, email, password, handleSubmit, handleSigninLogin 
       </div>
       <div style={{ display: "inline" }}>
         <span style={{ marginRight: "1rem" }} className="btn">
-          Forgot password?
+          <b>Forgot password?</b>
         </span>
         <br />
         <span className="btn" onClick={handleSigninLogin}>
-          Not a member?
+          <b>Not a member?</b>
         </span>
       </div>
       <label>

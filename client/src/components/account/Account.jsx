@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import logo from "../../assets/images/news-logo.jpg";
 import { useNavigate } from "react-router-dom";
 import "./account.css";
 import LogIn from "./LogIn";
 import Sign from "./Sign";
 import UsersAPI from "../../apis/users";
 
-// 1777857b53014728a4c5d34e5c79a4a2 api key for https://newsapi.org/docs/get-started
+// source api https://newsapi.org/docs/get-started
 
 const Account = ({ setIsUser }) => {
   const [message, setMessage] = useState("");
@@ -46,10 +47,11 @@ const Account = ({ setIsUser }) => {
     try {
       setisLoading((p) => true);
       const { data } = await UsersAPI.post(e.target.id, reqBody);
-      console.log(data);
+
       if (data.length) throw new Error(data[0].msg);
       else if (!data.token) throw new Error("Failed to log in");
       else {
+        console.log("user saved in local storage", data);
         localStorage.setItem("token", data.token);
         localStorage.setItem("userName", data.user.fullName);
       }
@@ -101,8 +103,9 @@ const Account = ({ setIsUser }) => {
 
       <div className={`account-right ${isLoading ? "loader1" : ""}`}>
         <img
-          src="https://media.gettyimages.com/id/1311148884/vector/abstract-globe-background.jpg?s=612x612&w=0&k=20&c=9rVQfrUGNtR5Q0ygmuQ9jviVUfrnYHUHcfiwaH5-WFE="
-          alt=""
+          // src="https://media.gettyimages.com/id/1311148884/vector/abstract-globe-background.jpg?s=612x612&w=0&k=20&c=9rVQfrUGNtR5Q0ygmuQ9jviVUfrnYHUHcfiwaH5-WFE="
+          src={logo}
+          alt="logo big"
         />
       </div>
     </section>

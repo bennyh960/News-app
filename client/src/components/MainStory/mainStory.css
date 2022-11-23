@@ -1,19 +1,24 @@
 .main-story-container {
   margin-top: 20px;
+  padding: 5px 10px;
   width: 100%;
   display: flex;
   gap: 1rem;
   max-height: 50vh;
   overflow: hidden;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  background-color: rgb(197, 228, 255);
+  border-radius: 5px;
 }
 
 .main-story-container div {
   flex: 1;
+  /* border: 1px solid green; */
 }
 
 .main_story_image img {
   height: 100%;
+  width: 100%;
   /* border: 1px solid black; */
 }
 
@@ -22,4 +27,5 @@
   flex-direction: column;
   gap: 2rem;
   line-height: 2rem;
+  /* width: 100%; */
 }

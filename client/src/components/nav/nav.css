@@ -15,6 +15,7 @@ nav {
 .nav-logo-user-container {
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 #nav-secondary {
@@ -53,6 +54,11 @@ nav ul,
 
 .active {
   color: yellow;
+}
+
+.logo-small img {
+  width: 80px;
+  border-radius: 50%;
 }
 
 @media screen and (max-width: 650px) {
