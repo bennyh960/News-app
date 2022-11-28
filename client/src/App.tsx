@@ -5,6 +5,7 @@ import Account from "./components/account/Account";
 import Home from "./components/home/Home";
 
 import Nav from "./components/nav/Nav";
+import RequireAuth from "./components/Protected/RequireAuth";
 import Weather from "./components/weather/Weather";
 
 interface context {
@@ -35,7 +36,9 @@ function App() {
         <Nav isUser={isUser} setIsUser={setIsUser} setCategory={setCategory} />
         <div className="container">
           <Routes>
-            <Route path="/" element={<Home category={category} />} />
+            <Route element={<RequireAuth isUser={isUser} />}>
+              <Route path="/" element={<Home category={category} />} />
+            </Route>
             <Route path="/weather" element={<Weather />} />
             <Route path="/account" element={<Account setIsUser={setIsUser} />} />
           </Routes>

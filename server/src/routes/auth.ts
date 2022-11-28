@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 import { check, validationResult } from "express-validator";
 
 import User from "../db/models/users";
@@ -9,6 +9,11 @@ const router = Router();
 interface response {
   error: null | string | string[];
   user: any;
+  token: null | string;
+}
+
+interface ResponseEx extends Response {
+  user?: any;
   token: null | string;
 }
 
