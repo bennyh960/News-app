@@ -20,6 +20,11 @@ app.use(cors());
 // app use routes
 app.use(authRouter);
 
+// deployment
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 app.listen(PORT, () => {
   console.log(chalk.green("Server run on port ", PORT));
 });

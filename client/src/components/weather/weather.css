@@ -1,7 +1,7 @@
 #weather {
   width: 100%;
   height: 88vh;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,7 +79,8 @@
 }
 
 .other-days-btn {
-  background-color: #04aa6d;
+  background-color: #4f94e4;
+
   color: white;
   cursor: pointer;
   display: flex;
@@ -102,8 +103,8 @@
 }
 
 .other-days-btn > *:hover {
-  background-color: #3e8e41;
-  color: yellow;
+  background-color: #1f66b6;
+  color: white;
 }
 
 .fill-bg {
@@ -115,12 +116,28 @@
 }
 
 .space-between {
+  display: flex;
+  width: 100%;
   justify-content: space-between;
   /* margin-top: 1px; */
 }
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
 
 .active_day {
-  background-color: #3e8e41;
+  background-color: #1f66b6;
+  color: white;
+}
+
+.day_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(66, 66, 66, 0.8);
 }
 
 @media screen and (max-width: 500px) {

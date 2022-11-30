@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import weaterApi from "../../apis/weather";
 import Select from "react-select";
 
 import "./weather.css";
+import "./sprite.css";
 import { getWeatherDataPerDay } from "../../services";
 import { Forecast, City, WeatherCalculatedObj, Weather } from "../../types";
 import citiesApi from "../../apis/countries.js";
 import Chart, { chartLabelUnits } from "../ChartCss/Chart";
 import { resolveDay, resolveDayNumFromString } from "../../services/resolveWeather";
+import ChartArea from "../ChartCss/ChartArea";
+import ChartBar from "../ChartCss/ChartBar";
 
 const WeatherApp = () => {
   const [city, setCity] = useState("");
@@ -16,16 +19,18 @@ const WeatherApp = () => {
   const [weatherData, setWeatherData] = useState<WeatherCalculatedObj | undefined>();
   const [dayAtWeek, setdayAtWeek] = useState<number>(new Date().getDay());
   const [isLoading, setIsLoading] = useState(false);
-  const [chartType, setChartType] = useState<"temperature" | "pressure" | "humidity">("temperature");
+  const [chartType, setChartType] = useState<"area" | "line" | "bar">("area");
+  const [chartData, setChartData] = useState<"temperature" | "pressure" | "humidity">("temperature");
 
   useEffect(() => {
     getWeaterData();
     renderDaysButtons();
+    // eslint-disable-next-line
   }, [city]);
 
   useEffect(() => {
     if (weatherData?.temp[0]) setWeatherData(() => getWeatherDataPerDay(listData, dayAtWeek));
-    // console.log("methode2", weatherData);
+    // eslint-disable-next-line
   }, [dayAtWeek]);
 
   const getWeaterData = async () => {
@@ -49,7 +54,10 @@ const WeatherApp = () => {
   const handleSearch = (option: { value: string; label: string }) => {
     setCity(() => option.value);
   };
-  const handleChangeChartType = (option: { value: "temperature" | "pressure" | "humidity"; label: string }) => {
+  const handleChangeChartData = (option: { value: "temperature" | "pressure" | "humidity"; label: string }) => {
+    setChartData(() => option.value);
+  };
+  const handleChangeChartType = (option: { value: "area" | "bar" | "line"; label: string }) => {
     setChartType(() => option.value);
   };
 
@@ -66,17 +74,23 @@ const WeatherApp = () => {
       nextFiveDays.push(resolveDay((currentDay + counter) % 7));
       counter++;
     }
-    console.log(daysObj);
+    // console.log(daysObj);
 
     return nextFiveDays.map((day) => {
+      /* @ts-ignore */
+      const weatherClassIcon = daysObj[day]?.replace(" ", "") + "Icon";
+
       return (
         <div
           key={day}
-          className={resolveDay(dayAtWeek).toLowerCase() === day.toLowerCase() ? `active_day` : ``}
+          className={
+            resolveDay(dayAtWeek).toLowerCase() === day.toLowerCase() ? `active_day day_wrapper` : `day_wrapper`
+          }
           onClick={() => setdayAtWeek(() => resolveDayNumFromString(day))}
         >
           <div>{day}</div>
-          <div style={{ color: "black" }}>
+          <div className={`sprite ${weatherClassIcon}`}></div>
+          <div>
             {/* @ts-ignore */}
             {daysObj[day]}
           </div>
@@ -86,7 +100,8 @@ const WeatherApp = () => {
   };
 
   return (
-    <section id="weather" className={`container ${weatherData?.getMaxOccure("weatherDescription").replace(" ", "")}`}>
+    // <section id="weather" className={`container ${weatherData?.getMaxOccure("weatherDescription").replace(" ", "")}`}>
+    <section id="weather" className={`container`}>
       <div className="search_city fill-bg">
         <h3>{weatherData?.date?.split(" ").slice(0, 3).join(" ")}</h3>
         <div className="select_container">
@@ -105,7 +120,9 @@ const WeatherApp = () => {
       {weatherData && (
         <>
           <div className="other-days-btn">{renderDaysButtons()}</div>
-          <div className="weather-data-container">
+          <div
+            className={`weather-data-container  ${weatherData?.getMaxOccure("weatherDescription").replace(" ", "")}`}
+          >
             <span className="btn_change_chart">
               Temperature :{weatherData?.getAverage("temp")} {chartLabelUnits.temperature}
             </span>
@@ -135,10 +152,7 @@ const WeatherApp = () => {
             <span>Ground Level : {weatherData?.getAverage("grndLevel")} mm</span>
             <span>Sea Level: {weatherData?.getAverage("seaLevel")} mm</span>
           </div>
-          <div className="fill-bg space-between">
-            <h3>
-              {chartType[0].toLocaleUpperCase() + chartType.split("").slice(1).join("")}[{chartLabelUnits[chartType]}]
-            </h3>
+          <div className="space-between">
             <Select
               options={[
                 { value: "temperature", label: "Temperature" },
@@ -147,10 +161,22 @@ const WeatherApp = () => {
               ]}
               placeholder={"Select Chart Values..."}
               // @ts-ignore
+              onChange={handleChangeChartData}
+            />
+            <Select
+              options={[
+                { value: "area", label: "Area" },
+                { value: "bar", label: "Bar" },
+                { value: "line", label: "Line" },
+              ]}
+              placeholder={"Select Chart Type..."}
+              // @ts-ignore
               onChange={handleChangeChartType}
             />
           </div>
-          {weatherData && <Chart data={weatherData?.mergeArray()} type={chartType} />}
+          {weatherData && chartType === "line" && <Chart data={weatherData?.mergeArray()} type={chartData} />}
+          {weatherData && chartType === "area" && <ChartArea data={weatherData?.mergeArray()} type={chartData} />}
+          {weatherData && chartType === "bar" && <ChartBar data={weatherData?.mergeArray()} type={chartData} />}
         </>
       )}
     </section>

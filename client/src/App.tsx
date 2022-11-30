@@ -6,6 +6,7 @@ import Home from "./components/home/Home";
 
 import Nav from "./components/nav/Nav";
 import RequireAuth from "./components/Protected/RequireAuth";
+import Test from "./components/tests/Test";
 import WeatherApp from "./components/weather/Weather";
 
 interface context {
@@ -41,6 +42,7 @@ function App() {
             </Route>
             <Route path="/weather" element={<WeatherApp />} />
             <Route path="/account" element={<Account setIsUser={setIsUser} />} />
+            {process.env.NODE_ENV === "development" && <Route path="/test" element={<Test />} />}
           </Routes>
         </div>
       </Router>
