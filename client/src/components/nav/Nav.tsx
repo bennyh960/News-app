@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import UseGetHook from "../../hooks/useAuth";
 import logoSmall from "../../assets/images/news-logo.jpg";
 
@@ -10,6 +10,7 @@ const Nav: React.FC<any> = ({ setIsUser, isUser, setCategory }) => {
   const [token, setToken] = useState("");
   const [active, setActive] = useState("general");
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const user = localStorage.getItem("userName");
@@ -30,7 +31,6 @@ const Nav: React.FC<any> = ({ setIsUser, isUser, setCategory }) => {
   };
 
   const handleCategoryClicked = (e: any) => {
-    console.log(e.target.id);
     setCategory(() => e.target.id);
     setActive(() => e.target.id);
   };
@@ -79,39 +79,45 @@ const Nav: React.FC<any> = ({ setIsUser, isUser, setCategory }) => {
           </ul>
         </div>
       </nav>
-      <div id="nav-secondary">
-        <ul>
-          <li className={`btn ${active === "general" ? "active" : ""}`} onClick={handleCategoryClicked} id="general">
-            General
-          </li>
-          <li className={`btn ${active === "business" ? "active" : ""}`} onClick={handleCategoryClicked} id="business">
-            Business
-          </li>
-          <li
-            className={`btn ${active === "entertainment" ? "active" : ""}`}
-            onClick={handleCategoryClicked}
-            id="entertainment"
-          >
-            Entertainment
-          </li>
-          <li className={`btn ${active === "health" ? "active" : ""}`} onClick={handleCategoryClicked} id="health">
-            Health
-          </li>
-          <li className={`btn ${active === "science" ? "active" : ""}`} onClick={handleCategoryClicked} id="science">
-            Science
-          </li>
-          <li className={`btn ${active === "sports" ? "active" : ""}`} onClick={handleCategoryClicked} id="sports">
-            Sports
-          </li>
-          <li
-            className={`btn ${active === "technology" ? "active" : ""}`}
-            onClick={handleCategoryClicked}
-            id="technology"
-          >
-            Technology
-          </li>
-        </ul>
-      </div>
+      {location.pathname === "/" && (
+        <div id="nav-secondary">
+          <ul>
+            <li className={`btn ${active === "general" ? "active" : ""}`} onClick={handleCategoryClicked} id="general">
+              General
+            </li>
+            <li
+              className={`btn ${active === "business" ? "active" : ""}`}
+              onClick={handleCategoryClicked}
+              id="business"
+            >
+              Business
+            </li>
+            <li
+              className={`btn ${active === "entertainment" ? "active" : ""}`}
+              onClick={handleCategoryClicked}
+              id="entertainment"
+            >
+              Entertainment
+            </li>
+            <li className={`btn ${active === "health" ? "active" : ""}`} onClick={handleCategoryClicked} id="health">
+              Health
+            </li>
+            <li className={`btn ${active === "science" ? "active" : ""}`} onClick={handleCategoryClicked} id="science">
+              Science
+            </li>
+            <li className={`btn ${active === "sports" ? "active" : ""}`} onClick={handleCategoryClicked} id="sports">
+              Sports
+            </li>
+            <li
+              className={`btn ${active === "technology" ? "active" : ""}`}
+              onClick={handleCategoryClicked}
+              id="technology"
+            >
+              Technology
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 };

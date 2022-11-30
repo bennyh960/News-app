@@ -4,7 +4,7 @@ const israel = [
   "Arugot",
   "Aseret",
   "En Ayyala",
-  "En HaShelosha",
+  // "En HaShelosha",
   "Evron",
   "Acre",
   "Afiqim",

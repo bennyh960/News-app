@@ -67,7 +67,7 @@ nav ul,
   }
   #nav-primary > div {
     flex: 0;
-    border: 3px solid green;
+    /* border: 3px solid green; */
   }
   #nav-secondary {
     font-size: 10px;

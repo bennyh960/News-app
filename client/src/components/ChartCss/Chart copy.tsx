@@ -30,8 +30,8 @@ const Chart = ({ data, type }: ChartDataProp) => {
   };
 
   return (
-    <ResponsiveContainer maxHeight={150} width={"100%"}>
-      <LineChart style={{ background: "#cdcdcd9a" }} data={data} title={`${type} ${chartLabelUnits[type]}`}>
+    <ResponsiveContainer width="100%" height={"100%"}>
+      <LineChart width={500} height={300} data={data} title={`${type} ${chartLabelUnits[type]}`}>
         <XAxis dataKey="time" />
         <YAxis domain={["dataMin -1", "dataMax+1"]} type="number" />
 
@@ -39,7 +39,7 @@ const Chart = ({ data, type }: ChartDataProp) => {
         {type === "temperature" && (
           <Line
             type="monotone"
-            dataKey="temperature"
+            dataKey="key"
             stroke="#8884d8"
             // @ts-ignore
             label={CustomizedLabel}
